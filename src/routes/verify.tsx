@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
 import {
   decodePortableFragment,
+  lookupReceipt,
   packPortable,
   parsePortable,
   PUBLIC_EXAMPLE_RECEIPT_ID,
@@ -151,13 +152,19 @@ function VerifyInner() {
       await verifyText(json);
       return;
     }
-    const found = byId(query.trim());
-    if (!found) {
-      setError("No receipt with that identifier in this explorer.");
+    const found = lookupReceipt(query, receipts);
+    if (!found.ok) {
+      setError(
+        found.via === "digest"
+          ? "No receipt with that digest in this explorer. A digest names a receipt; it is not the receipt. Bring the file or the share link."
+          : "No receipt with that identifier in this explorer.",
+      );
+      setReport(null);
+      setActive(null);
       return;
     }
     setImportedChain([]);
-    await run(found);
+    await run(found.receipt);
   }
 
   async function onFile(e: ChangeEvent<HTMLInputElement>) {
@@ -185,10 +192,13 @@ function VerifyInner() {
       </p>
       <h1 className="mt-2 font-display text-4xl">Verify a fulfillment receipt</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">
-        A portable receipt can leave this machine. Paste the JSON or open the
-        file. This verifier does not reuse the engine that issued it. It
-        recomputes the digest, checks the Ed25519 signature, and checks the
-        policy. The explorer key is public. It is not a production authority.
+        A portable receipt can leave this machine. Paste the JSON, open the
+        file, or paste the full digest from a paper sheet. A digest names a
+        receipt; it is not the receipt. If this explorer does not hold those
+        bytes, it does not hold here — bring the file or the share link. This
+        verifier does not reuse the engine that issued it. It recomputes the
+        digest, checks the Ed25519 signature, and checks the policy. The
+        explorer key is public. It is not a production authority.
         Machines: read the{" "}
         <Link to="/agents" className="text-primary underline-offset-4 hover:underline">
           agent contract
@@ -200,13 +210,15 @@ function VerifyInner() {
       <form onSubmit={onLookup} className="mt-8 grid gap-4 lg:grid-cols-2">
         <div className="space-y-3">
           <label className="text-sm text-fg-muted" htmlFor="rid">
-            Receipt ID in this explorer
+            Receipt ID, or the full digest from the paper
           </label>
           <Input
             id="rid"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="pof_edu_t2_ok"
+            placeholder="pof_edu_t2_ok or sha256:…"
+            autoComplete="off"
+            spellCheck={false}
           />
           <div className="flex flex-wrap gap-2">
             {examples.map((id) => (

@@ -42,7 +42,8 @@ function PaperInner() {
     <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-print-hide>
         <p className="text-sm text-fg-muted">
-          Print or save as PDF. This sheet is not a person.
+          Print or save as PDF. Paste the digest on Verify. This sheet is not
+          a person.
         </p>
         <PaperPrint receipt={receipt} />
       </div>

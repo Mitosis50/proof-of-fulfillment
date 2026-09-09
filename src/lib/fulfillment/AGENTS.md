@@ -66,9 +66,10 @@ A new policy needs:
   envelope inside the digest.
 - `paper.ts` — the sheet a human can print or save as PDF. Digest,
   not-asserted, tagline. No person. Print CSS hides chrome.
-- `agent-contract.ts` — public machine interface. Agents may verify.
-  They may not mint VERIFIED, publish a person, or authorize payment.
-  `/agents` renders this object. Tests freeze it.
+- `lookup.ts` — find a receipt this explorer already holds, by id or by
+  full SHA-256. A digest names a receipt; it is not the receipt. Short
+  prefixes are not keys. An unknown digest does not hold here.
+
 
 
 
