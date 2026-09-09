@@ -5,7 +5,7 @@
   "description": "We verify the obligation. We do not publish the person.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fulfilled/proof-of-fulfillment.git"
+    "url": "https://github.com/Mitosis50/proof-of-fulfillment.git"
   },
   "engines": {
     "node": ">=22"

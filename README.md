@@ -97,7 +97,7 @@ issue a **new** receipt. History is not rewritten.
 This is the intended public home: a repository you own, a Vercel project you
 own, a domain you own. grok.me is not the product name.
 
-1. Push this tree to GitHub (`fulfilled/proof-of-fulfillment`, or your account).
+1. This tree is at [Mitosis50/proof-of-fulfillment](https://github.com/Mitosis50/proof-of-fulfillment).
 2. In Vercel: **Add New Project** → import that repo.
 3. Framework: leave unset (Nitro already emits Vercel’s build output).
 4. Build command: `npm run build` (already in `vercel.json`).
