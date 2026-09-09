@@ -97,8 +97,10 @@ The sheet is the public receipt: assertions, not-asserted, full digest.
 It is not a person. Use the browser’s Save as PDF. There is no name on it.
 ## Whitepaper
 
-The protocol paper is [WHITEPAPER.md](./WHITEPAPER.md) and `/whitepaper`.
-Short. Same voice. Frozen hashes. Not a sales deck.
+Independent human check: five strangers, twenty minutes.
+See [HUMAN-CHECK.md](./HUMAN-CHECK.md) or `/human-check`. Pay them yourself.
+Do not put a real person on the explorer.
+
 
 
 

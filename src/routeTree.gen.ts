@@ -14,6 +14,7 @@ import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as ChallengeRouteImport } from './routes/challenge'
 import { Route as CirclesRouteImport } from './routes/circles'
 import { Route as DoctrineRouteImport } from './routes/doctrine'
+import { Route as HumanCheckRouteImport } from './routes/human-check'
 import { Route as NamingRouteImport } from './routes/naming'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as RegistryRouteImport } from './routes/registry'
@@ -51,6 +52,11 @@ const CirclesRoute = CirclesRouteImport.update({
 const DoctrineRoute = DoctrineRouteImport.update({
   id: '/doctrine',
   path: '/doctrine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HumanCheckRoute = HumanCheckRouteImport.update({
+  id: '/human-check',
+  path: '/human-check',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NamingRoute = NamingRouteImport.update({
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
+  '/human-check': typeof HumanCheckRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
+  '/human-check': typeof HumanCheckRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
+  '/human-check': typeof HumanCheckRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/challenge'
     | '/circles'
     | '/doctrine'
+    | '/human-check'
     | '/naming'
     | '/policies'
     | '/registry'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/challenge'
     | '/circles'
     | '/doctrine'
+    | '/human-check'
     | '/naming'
     | '/policies'
     | '/registry'
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '/challenge'
     | '/circles'
     | '/doctrine'
+    | '/human-check'
     | '/naming'
     | '/policies'
     | '/registry'
@@ -249,6 +261,7 @@ export interface RootRouteChildren {
   ChallengeRoute: typeof ChallengeRoute
   CirclesRoute: typeof CirclesRoute
   DoctrineRoute: typeof DoctrineRoute
+  HumanCheckRoute: typeof HumanCheckRoute
   NamingRoute: typeof NamingRoute
   PoliciesRoute: typeof PoliciesRoute
   RegistryRoute: typeof RegistryRoute
@@ -299,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/doctrine'
       fullPath: '/doctrine'
       preLoaderRoute: typeof DoctrineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/human-check': {
+      id: '/human-check'
+      path: '/human-check'
+      fullPath: '/human-check'
+      preLoaderRoute: typeof HumanCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/naming': {
@@ -401,6 +421,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChallengeRoute: ChallengeRoute,
   CirclesRoute: CirclesRoute,
   DoctrineRoute: DoctrineRoute,
+  HumanCheckRoute: HumanCheckRoute,
   NamingRoute: NamingRoute,
   PoliciesRoute: PoliciesRoute,
   RegistryRoute: RegistryRoute,

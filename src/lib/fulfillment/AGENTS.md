@@ -77,8 +77,10 @@ A new policy needs:
 - `registry.ts` — frozen public policy registry. Hashes must match
   `LOCKED_POLICY_HASHES`. `/registry` for humans. `/registry.json` for
   machines. Do not edit a version in place.
-- `whitepaper.ts` — protocol paper. Frozen hashes. Honest limits. Not a
-  sales deck. `/whitepaper` and `WHITEPAPER.md` must match.
+- `human-check.ts` — independent human check. Five strangers, twenty
+  minutes. They must not put a real person on the explorer. `/human-check`
+  and `HUMAN-CHECK.md` must match.
+
 - `share.ts` — frozen social card copy. `/share` is what a crawler
   reads. It may say Holds only because the public example is golden.
   It may not publish a person.
