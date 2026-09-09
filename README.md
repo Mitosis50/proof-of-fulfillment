@@ -95,9 +95,11 @@ issue a **new** receipt. History is not rewritten.
 Print or save as PDF from **Print paper receipt**, or open `/paper/{id}`.
 The sheet is the public receipt: assertions, not-asserted, full digest.
 It is not a person. Use the browser’s Save as PDF. There is no name on it.
-Send **`/share`**. That URL is the social card: *Holds · tuition
-obligation. Not a person.* Crawlers do not run Verify. The copy is
-frozen. The image has no name.
+## Whitepaper
+
+The protocol paper is [WHITEPAPER.md](./WHITEPAPER.md) and `/whitepaper`.
+Short. Same voice. Frozen hashes. Not a sales deck.
+
 
 
 The policy pin is `/registry` and `/registry.json`. Hashes are frozen.

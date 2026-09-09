@@ -54,6 +54,10 @@ function DoctrinePage() {
         <Link to="/agents" className="text-primary underline-offset-4 hover:underline">
           agents
         </Link>
+        . The protocol paper is the{" "}
+        <Link to="/whitepaper" className="text-primary underline-offset-4 hover:underline">
+          whitepaper
+        </Link>
         . Allowed words describe obligations. Banned words rank people.
 
       </p>

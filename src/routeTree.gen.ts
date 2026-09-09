@@ -19,6 +19,7 @@ import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as RegistryRouteImport } from './routes/registry'
 import { Route as ShareRouteImport } from './routes/share'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WorkshopRouteImport } from './routes/workshop'
 import { Route as DemoConsultRouteImport } from './routes/demo/consult'
 import { Route as DemoRentRouteImport } from './routes/demo/rent'
@@ -77,6 +78,11 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhitepaperRoute = WhitepaperRouteImport.update({
+  id: '/whitepaper',
+  path: '/whitepaper',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkshopRoute = WorkshopRouteImport.update({
   id: '/workshop',
   path: '/workshop',
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/registry': typeof RegistryRoute
   '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/registry': typeof RegistryRoute
   '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/registry': typeof RegistryRoute
   '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/registry'
     | '/share'
     | '/verify'
+    | '/whitepaper'
     | '/workshop'
     | '/demo/consult'
     | '/demo/rent'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/registry'
     | '/share'
     | '/verify'
+    | '/whitepaper'
     | '/workshop'
     | '/demo/consult'
     | '/demo/rent'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/registry'
     | '/share'
     | '/verify'
+    | '/whitepaper'
     | '/workshop'
     | '/demo/consult'
     | '/demo/rent'
@@ -242,6 +254,7 @@ export interface RootRouteChildren {
   RegistryRoute: typeof RegistryRoute
   ShareRoute: typeof ShareRoute
   VerifyRoute: typeof VerifyRoute
+  WhitepaperRoute: typeof WhitepaperRoute
   WorkshopRoute: typeof WorkshopRoute
   DemoConsultRoute: typeof DemoConsultRoute
   DemoRentRoute: typeof DemoRentRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/whitepaper': {
+      id: '/whitepaper'
+      path: '/whitepaper'
+      fullPath: '/whitepaper'
+      preLoaderRoute: typeof WhitepaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/workshop': {
       id: '/workshop'
       path: '/workshop'
@@ -386,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegistryRoute: RegistryRoute,
   ShareRoute: ShareRoute,
   VerifyRoute: VerifyRoute,
+  WhitepaperRoute: WhitepaperRoute,
   WorkshopRoute: WorkshopRoute,
   DemoConsultRoute: DemoConsultRoute,
   DemoRentRoute: DemoRentRoute,

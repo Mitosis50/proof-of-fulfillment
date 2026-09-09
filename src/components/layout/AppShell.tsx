@@ -14,6 +14,7 @@ const NAV = [
   { to: "/policies", label: "Policies" },
   { to: "/registry", label: "Registry" },
   { to: "/doctrine", label: "Doctrine" },
+  { to: "/whitepaper", label: "Paper" },
   { to: "/naming", label: "Naming" },
 ];
 
