@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as ChallengeRouteImport } from './routes/challenge'
 import { Route as CirclesRouteImport } from './routes/circles'
 import { Route as DoctrineRouteImport } from './routes/doctrine'
@@ -25,6 +26,11 @@ import { Route as ReceiptsIdRouteImport } from './routes/receipts/$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChallengeRoute = ChallengeRouteImport.update({
@@ -85,6 +91,7 @@ const ReceiptsIdRoute = ReceiptsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/challenge': typeof ChallengeRoute
   '/circles': typeof CirclesRoute
   '/doctrine': typeof DoctrineRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agents'
     | '/challenge'
     | '/circles'
     | '/doctrine'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agents'
     | '/challenge'
     | '/circles'
     | '/doctrine'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/agents'
     | '/challenge'
     | '/circles'
     | '/doctrine'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsRoute: typeof AgentsRoute
   ChallengeRoute: typeof ChallengeRoute
   CirclesRoute: typeof CirclesRoute
   DoctrineRoute: typeof DoctrineRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/challenge': {
@@ -277,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsRoute: AgentsRoute,
   ChallengeRoute: ChallengeRoute,
   CirclesRoute: CirclesRoute,
   DoctrineRoute: DoctrineRoute,
