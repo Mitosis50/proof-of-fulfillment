@@ -88,6 +88,50 @@ export function serializePortable(portable: PortableReceipt): string {
   return `${JSON.stringify(portable, null, 2)}\n`;
 }
 
+export const PORTABLE_HASH_PREFIX = "pof=";
+
+function bytesToB64Url(bytes: Uint8Array): string {
+  let bin = "";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!);
+  const b64 = btoa(bin);
+  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function b64UrlToBytes(s: string): Uint8Array {
+  const b64 = s.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = b64.length % 4 === 0 ? "" : "=".repeat(4 - (b64.length % 4));
+  const bin = atob(b64 + pad);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+export function encodePortableFragment(portable: PortableReceipt): string {
+  const compact = JSON.stringify(portable);
+  return `${PORTABLE_HASH_PREFIX}${bytesToB64Url(new TextEncoder().encode(compact))}`;
+}
+
+export function decodePortableFragment(hash: string): PortableParse {
+  const raw = hash.startsWith("#") ? hash.slice(1) : hash;
+  if (!raw.startsWith(PORTABLE_HASH_PREFIX)) {
+    return { ok: false, error: "That link is not a portable fulfillment receipt." };
+  }
+  try {
+    const json = new TextDecoder().decode(b64UrlToBytes(raw.slice(PORTABLE_HASH_PREFIX.length)));
+    return parsePortable(json);
+  } catch {
+    return { ok: false, error: "That link could not be read." };
+  }
+}
+
+export function portableSharePath(
+  receipt: SignedReceipt,
+  library: SignedReceipt[] = [],
+): string {
+  return `/verify#${encodePortableFragment(packPortable(receipt, library))}`;
+}
+
+
 export function privacyScan(value: unknown, path = "$"): string | null {
   if (value === null || value === undefined) return null;
   if (typeof value === "string") {

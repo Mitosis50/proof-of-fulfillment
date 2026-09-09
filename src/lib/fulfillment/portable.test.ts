@@ -3,9 +3,12 @@ import { describe, it } from "node:test";
 import { buildDemoLibrary } from "./fixtures.ts";
 import { verifyIndependently } from "./verifier.ts";
 import {
+  decodePortableFragment,
+  encodePortableFragment,
   packPortable,
   parsePortable,
   portableFilename,
+  portableSharePath,
   privacyScan,
   serializePortable,
 } from "./portable.ts";
@@ -105,5 +108,37 @@ describe("portable fulfillment receipts", () => {
     const report = await verifyIndependently(parsed.receipt, parsed.chain);
     assert.equal(report.ok, false);
     assert.equal(report.digest_matches, false);
+  });
+
+  it("a share fragment round-trips and still holds", async () => {
+    const { receipts } = await buildDemoLibrary();
+    const original = receipts.find((r) => r.receipt_id === "pof_edu_t2_ok");
+    assert.ok(original);
+    const fragment = encodePortableFragment(packPortable(original, receipts));
+    assert.match(fragment, /^pof=/);
+    const parsed = decodePortableFragment(`#${fragment}`);
+    assert.equal(parsed.ok, true);
+    if (!parsed.ok) return;
+    const report = await verifyIndependently(parsed.receipt, parsed.chain);
+    assert.equal(report.ok, true);
+    assert.equal(portableSharePath(original, receipts).startsWith("/verify#pof="), true);
+  });
+
+  it("a share fragment with a person is refused", () => {
+    const packed = {
+      record_type: "pof.portable_receipt",
+      schema_version: "1.0.0",
+      notice: "x",
+      receipt: { student_name: "Jane Doe" },
+      chain: [],
+    };
+    const fragment = encodePortableFragment(packed as never);
+    const parsed = decodePortableFragment(fragment);
+    assert.equal(parsed.ok, false);
+  });
+
+  it("a garbage fragment does not hold", () => {
+    const parsed = decodePortableFragment("#pof=%%%");
+    assert.equal(parsed.ok, false);
   });
 });

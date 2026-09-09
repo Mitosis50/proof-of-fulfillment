@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   packPortable,
   portableFilename,
+  portableSharePath,
   serializePortable,
   type SignedReceipt,
 } from "@/lib/fulfillment";
@@ -19,6 +21,13 @@ export function downloadPortable(receipt: SignedReceipt, library: SignedReceipt[
   URL.revokeObjectURL(url);
 }
 
+export async function copyShareLink(receipt: SignedReceipt, library: SignedReceipt[] = []) {
+  const path = portableSharePath(receipt, library);
+  const url = `${window.location.origin}${path}`;
+  await navigator.clipboard.writeText(url);
+  return url;
+}
+
 export function PortableDownload({
   receipt,
   library = [],
@@ -28,13 +37,29 @@ export function PortableDownload({
   library?: SignedReceipt[];
   variant?: "outline" | "default";
 }) {
+  const [copied, setCopied] = useState(false);
+
   return (
-    <Button
-      type="button"
-      variant={variant}
-      onClick={() => downloadPortable(receipt, library)}
-    >
-      Download portable receipt
-    </Button>
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <Button
+        type="button"
+        variant={variant}
+        onClick={() => downloadPortable(receipt, library)}
+      >
+        Download portable receipt
+      </Button>
+      <Button
+        type="button"
+        variant="outline"
+        onClick={() => {
+          void copyShareLink(receipt, library).then(() => {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 2000);
+          });
+        }}
+      >
+        {copied ? "Link copied" : "Copy share link"}
+      </Button>
+    </div>
   );
 }

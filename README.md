@@ -95,8 +95,9 @@ issue a **new** receipt. History is not rewritten.
 A receipt can leave this machine. Download `{receipt_id}.pof.json` from
 Workshop, the receipt page, or Verify. The file is the public receipt plus
 any ancestor receipts. It is not a person. Paste or open that file on Verify.
-Same digest, same signature. Holds or does not hold. A file with a name,
-email, or diagnosis is refused.
+**Copy share link** puts the same bytes in the URL fragment (`/verify#pof=…`).
+The fragment is not sent to a server. Same digest, same signature. Holds or
+does not hold. A file or link with a name, email, or diagnosis is refused.
 
 
 ## Host it yourself (GitHub → Vercel)

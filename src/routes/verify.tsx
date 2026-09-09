@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SeedGate } from "@/components/layout/SeedGate";
 import { PortableDownload } from "@/components/receipt/PortableDownload";
@@ -7,7 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
 import {
+  decodePortableFragment,
+  packPortable,
   parsePortable,
+  serializePortable,
   verifyIndependently,
   type SignedReceipt,
 } from "@/lib/fulfillment";
@@ -41,6 +44,34 @@ function VerifyInner() {
     () => receipts.slice(0, 5).map((r) => r.receipt_id),
     [receipts],
   );
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash.includes("pof=")) return;
+    const parsed = decodePortableFragment(hash);
+    if (!parsed.ok) {
+      setError(parsed.error);
+      return;
+    }
+    setImportedChain(parsed.chain);
+    setJson(serializePortable(packPortable(parsed.receipt, parsed.chain)));
+    void (async () => {
+      setBusy(true);
+      try {
+        const result = await verifyIndependently(parsed.receipt, [
+          parsed.receipt,
+          ...parsed.chain,
+        ]);
+        setActive(parsed.receipt);
+        setReport(result);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Verification failed");
+      } finally {
+        setBusy(false);
+      }
+    })();
+  }, []);
+
 
   async function run(receipt: SignedReceipt, extra: SignedReceipt[] = [], tamper = false) {
     setBusy(true);
