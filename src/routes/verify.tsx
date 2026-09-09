@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SeedGate } from "@/components/layout/SeedGate";
 import { PortableDownload } from "@/components/receipt/PortableDownload";
+import { PaperPrint } from "@/components/receipt/PaperPrint";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -178,6 +179,7 @@ function VerifyInner() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div data-print-hide>
       <p className="text-2xs uppercase tracking-caps text-fg-subtle">
         Independent verifier
       </p>
@@ -261,10 +263,11 @@ function VerifyInner() {
       </form>
 
       {error ? <p className="mt-6 text-sm text-failed">{error}</p> : null}
+      </div>
 
       {report && active ? (
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="rounded-lg border border-border bg-bg-elevated p-5">
+          <div className="rounded-lg border border-border bg-bg-elevated p-5" data-print-hide>
             <p className="text-2xs uppercase tracking-label text-fg-subtle">
               Independent report
             </p>
@@ -294,6 +297,7 @@ function VerifyInner() {
                 Open the human receipt
               </Link>
               <PortableDownload receipt={active} library={[...importedChain, ...receipts]} />
+              <PaperPrint receipt={active} />
             </div>
           </div>
           <FulfillmentReceipt receipt={active} />

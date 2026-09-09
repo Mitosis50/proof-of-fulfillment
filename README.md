@@ -92,8 +92,10 @@ Then open **Workshop** (live issuance), **Verify** (independent check),
 `pof_rent_*` ids. Live issuances use `pof_live_*`. Challenge and correction
 issue a **new** receipt. History is not rewritten.
 
-A stranger can open a verified example without issuing: `/verify?example=pof_edu_t2_ok`.
-That id is frozen. It must remain VERIFIED.
+Print or save as PDF from **Print paper receipt**, or open `/paper/{id}`.
+The sheet is the public receipt: assertions, not-asserted, full digest.
+It is not a person. Use the browser’s Save as PDF. There is no name on it.
+
 
 
 A receipt can leave this machine. Download `{receipt_id}.pof.json` from

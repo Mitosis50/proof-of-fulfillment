@@ -74,3 +74,33 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@media print {
+  @page {
+    size: letter;
+    margin: 14mm;
+  }
+  html,
+  body,
+  #app {
+    background: #fff !important;
+    color: #1a1714 !important;
+  }
+  [data-app-chrome],
+  [data-print-hide] {
+    display: none !important;
+  }
+  main {
+    display: block !important;
+  }
+  .paper-receipt {
+    box-shadow: none !important;
+    break-inside: avoid;
+    border: 1px solid #c4bbab !important;
+  }
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}
+

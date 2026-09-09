@@ -3,6 +3,7 @@ import { SeedGate } from "@/components/layout/SeedGate";
 import { Button } from "@/components/ui/button";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
 import { useReceipts } from "@/store/receipts";
+import { PaperPrint } from "@/components/receipt/PaperPrint";
 import { PortableDownload } from "@/components/receipt/PortableDownload";
 import {
   packPortable,
@@ -61,7 +62,7 @@ function ReceiptInner() {
   return (
     <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-[1.1fr_0.9fr] sm:px-6">
       <FulfillmentReceipt receipt={receipt} />
-      <aside className="space-y-6">
+      <aside className="space-y-6" data-print-hide>
         <section>
           <h1 className="font-display text-3xl">What this receipt means</h1>
           <p className="mt-3 text-fg-muted">
@@ -132,6 +133,12 @@ function ReceiptInner() {
             Copy portable JSON
           </Button>
           <PortableDownload receipt={receipt} library={receipts} />
+          <PaperPrint receipt={receipt} />
+          <Button asChild variant="outline">
+            <Link to="/paper/$id" params={{ id: receipt.receipt_id }}>
+              Open paper sheet
+            </Link>
+          </Button>
         </div>
       </aside>
     </div>

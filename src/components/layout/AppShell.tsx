@@ -31,7 +31,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh flex flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur-sm">
+      <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur-sm" data-app-chrome>
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link to="/" className="flex items-baseline gap-2 min-h-11">
             <span className="font-display text-lg tracking-tight text-fg">Fulfilled</span>
@@ -82,7 +82,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         ) : null}
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="border-t border-border">
+      <footer className="border-t border-border" data-app-chrome>
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p className="text-sm text-fg-muted">
             We verify the obligation. We do not publish the person.

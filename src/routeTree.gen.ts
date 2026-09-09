@@ -21,6 +21,7 @@ import { Route as WorkshopRouteImport } from './routes/workshop'
 import { Route as DemoConsultRouteImport } from './routes/demo/consult'
 import { Route as DemoRentRouteImport } from './routes/demo/rent'
 import { Route as DemoTuitionRouteImport } from './routes/demo/tuition'
+import { Route as PaperIdRouteImport } from './routes/paper/$id'
 import { Route as ReceiptsIdRouteImport } from './routes/receipts/$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +84,11 @@ const DemoTuitionRoute = DemoTuitionRouteImport.update({
   path: '/demo/tuition',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaperIdRoute = PaperIdRouteImport.update({
+  id: '/paper/$id',
+  path: '/paper/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReceiptsIdRoute = ReceiptsIdRouteImport.update({
   id: '/receipts/$id',
   path: '/receipts/$id',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
   '/demo/tuition': typeof DemoTuitionRoute
+  '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
   '/demo/tuition': typeof DemoTuitionRoute
+  '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
 }
 export interface FileRoutesById {
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/demo/consult': typeof DemoConsultRoute
   '/demo/rent': typeof DemoRentRoute
   '/demo/tuition': typeof DemoTuitionRoute
+  '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/demo/consult'
     | '/demo/rent'
     | '/demo/tuition'
+    | '/paper/$id'
     | '/receipts/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/demo/consult'
     | '/demo/rent'
     | '/demo/tuition'
+    | '/paper/$id'
     | '/receipts/$id'
   id:
     | '__root__'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/demo/consult'
     | '/demo/rent'
     | '/demo/tuition'
+    | '/paper/$id'
     | '/receipts/$id'
   fileRoutesById: FileRoutesById
 }
@@ -196,6 +208,7 @@ export interface RootRouteChildren {
   DemoConsultRoute: typeof DemoConsultRoute
   DemoRentRoute: typeof DemoRentRoute
   DemoTuitionRoute: typeof DemoTuitionRoute
+  PaperIdRoute: typeof PaperIdRoute
   ReceiptsIdRoute: typeof ReceiptsIdRoute
 }
 
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTuitionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/paper/$id': {
+      id: '/paper/$id'
+      path: '/paper/$id'
+      fullPath: '/paper/$id'
+      preLoaderRoute: typeof PaperIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/receipts/$id': {
       id: '/receipts/$id'
       path: '/receipts/$id'
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoConsultRoute: DemoConsultRoute,
   DemoRentRoute: DemoRentRoute,
   DemoTuitionRoute: DemoTuitionRoute,
+  PaperIdRoute: PaperIdRoute,
   ReceiptsIdRoute: ReceiptsIdRoute,
 }
 export const routeTree = rootRouteImport

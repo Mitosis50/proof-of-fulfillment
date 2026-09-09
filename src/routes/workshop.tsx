@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
 import { PortableDownload } from "@/components/receipt/PortableDownload";
+import { PaperPrint } from "@/components/receipt/PaperPrint";
 import { Badge, verdictTone } from "@/components/ui/badge";
 import { useReceipts } from "@/store/receipts";
 import {
@@ -132,6 +133,7 @@ function WorkshopInner() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div data-print-hide>
       <p className="text-2xs uppercase tracking-caps text-fg-subtle">
         Live issuance · synthetic evidence
       </p>
@@ -142,9 +144,10 @@ function WorkshopInner() {
         credit score — those claims are not on the policy, so they cannot
         appear on the receipt.
       </p>
+      </div>
 
       <div className="mt-10 grid gap-10 md:grid-cols-2">
-        <div className="space-y-6">
+        <div className="space-y-6" data-print-hide>
           <fieldset>
             <legend className="text-2xs uppercase tracking-label text-fg-subtle">
               Policy
@@ -255,7 +258,7 @@ function WorkshopInner() {
             <>
               <FulfillmentReceipt receipt={active} />
               {report ? (
-                <div className="rounded-lg border border-border bg-bg-elevated p-5">
+                <div className="rounded-lg border border-border bg-bg-elevated p-5" data-print-hide>
                   <p className="text-2xs uppercase tracking-label text-fg-subtle">
                     Independent verifier
                   </p>
@@ -274,11 +277,12 @@ function WorkshopInner() {
                       Open the human receipt
                     </Link>
                     <PortableDownload receipt={active} library={receipts} />
+                    <PaperPrint receipt={active} />
                   </div>
                 </div>
               ) : null}
 
-              <div className="rounded-lg border border-border p-5">
+              <div className="rounded-lg border border-border p-5" data-print-hide>
                 <p className="text-2xs uppercase tracking-label text-fg-subtle">
                   History stays
                 </p>

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { formatMoney, shortDigest, verdictLabel, type SignedReceipt } from "@/lib/fulfillment";
+import { formatMoney, verdictLabel, type SignedReceipt } from "@/lib/fulfillment";
 import { Badge, verdictTone } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +20,7 @@ export function FulfillmentReceipt({
   return (
     <article
       className={cn(
-        "relative bg-bg-elevated text-fg shadow-paper",
+        "paper-receipt relative bg-bg-elevated text-fg shadow-paper",
         compact ? "rounded-lg p-5" : "rounded-xl p-6 sm:p-8",
       )}
     >
@@ -81,7 +81,8 @@ export function FulfillmentReceipt({
           <p>
             Policy {receipt.policy.id} v{receipt.policy.version}
           </p>
-          <p>Digest {shortDigest(receipt.receipt_digest, 16)}</p>
+          <p>Digest {receipt.receipt_digest}</p>
+          <p>We verify the obligation. We do not publish the person.</p>
           {receipt.signature ? (
             <p>
               Signed {receipt.signature.alg} · {receipt.signature.key_id}
