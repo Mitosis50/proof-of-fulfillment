@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { buildDemoLibrary } from "./fixtures.ts";
 import { PUBLIC_EXAMPLE_RECEIPT_ID } from "./golden.ts";
-import { lookupReceipt, normalizeDigest } from "./lookup.ts";
+import { digestVerifyUrl, lookupReceipt, normalizeDigest } from "./lookup.ts";
 import { verifyIndependently } from "./verifier.ts";
 
 describe("lookup by digest", () => {
@@ -58,5 +58,25 @@ describe("lookup by digest", () => {
     const canonical = normalizeDigest(example.receipt_digest);
     assert.equal(canonical, example.receipt_digest);
     assert.match(canonical ?? "", /^sha256:[0-9a-f]{64}$/);
+  });
+
+  it("the paper QR encodes a digest URL, not a person and not the portable file", async () => {
+    const { receipts } = await buildDemoLibrary();
+    const example = receipts.find((r) => r.receipt_id === PUBLIC_EXAMPLE_RECEIPT_ID);
+    assert.ok(example);
+    const url = digestVerifyUrl("https://proof-of-fulfillment-seven.vercel.app", example.receipt_digest);
+    assert.ok(url);
+    assert.equal(
+      url.startsWith("https://proof-of-fulfillment-seven.vercel.app/verify?digest="),
+      true,
+    );
+    assert.equal(url.includes("#pof="), false);
+    assert.equal(url.includes("student"), false);
+    assert.equal(url.includes("@"), false);
+    const found = lookupReceipt(
+      new URL(url).searchParams.get("digest") ?? "",
+      receipts,
+    );
+    assert.equal(found.ok, true);
   });
 });

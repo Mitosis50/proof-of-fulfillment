@@ -70,6 +70,8 @@ A new policy needs:
   full SHA-256. A digest names a receipt; it is not the receipt. Short
   prefixes are not keys. An unknown digest does not hold here.
   `/verify?digest=` opens the independent check when the bytes are here.
+  Paper QR encodes that URL only — not a person, not `#pof=`.
+
 
 
 

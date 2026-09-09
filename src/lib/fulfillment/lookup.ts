@@ -34,3 +34,20 @@ export function lookupReceipt(
   const receipt = receipts.find((r) => r.receipt_id === id);
   return receipt ? { ok: true, via: "id", receipt } : { ok: false, via: "id" };
 }
+
+/**
+ * Camera target for the paper QR. Digest only — never the portable JSON,
+ * never a person.
+ */
+export function digestVerifyUrl(origin: string, digest: string): string | null {
+  const normalized = normalizeDigest(digest);
+  if (!normalized) return null;
+  try {
+    const url = new URL("/verify", origin);
+    url.searchParams.set("digest", normalized);
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return null;
+  }
+}

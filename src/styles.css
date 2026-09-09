@@ -98,6 +98,10 @@
     break-inside: avoid;
     border: 1px solid #c4bbab !important;
   }
+  .paper-receipt svg {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
   a {
     text-decoration: none !important;
     color: inherit !important;

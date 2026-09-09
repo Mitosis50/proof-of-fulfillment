@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { formatMoney, verdictLabel, type SignedReceipt } from "@/lib/fulfillment";
 import { Badge, verdictTone } from "@/components/ui/badge";
+import { DigestQr } from "@/components/receipt/DigestQr";
 import { cn } from "@/lib/utils";
 
 function statusTone(status: string) {
@@ -105,6 +106,7 @@ export function FulfillmentReceipt({
               </>
             ) : null}
           </p>
+          <DigestQr digest={receipt.receipt_digest} />
         </footer>
       ) : (
         <p className="relative mt-5 font-mono text-2xs text-fg-subtle">
