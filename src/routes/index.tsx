@@ -49,7 +49,12 @@ function Home() {
           </Button>
         </div>
         <p className="mt-4 max-w-xl text-sm text-fg-muted">
-          A synthetic tuition receipt. Independent check. No person.
+          A synthetic tuition receipt. Independent check. No person. The
+          card you send is{" "}
+          <Link to="/share" className="text-primary underline-offset-4 hover:underline">
+            /share
+          </Link>
+          .
         </p>
       </section>
 

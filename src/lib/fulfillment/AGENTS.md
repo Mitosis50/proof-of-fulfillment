@@ -77,9 +77,15 @@ A new policy needs:
 - `registry.ts` — frozen public policy registry. Hashes must match
   `LOCKED_POLICY_HASHES`. `/registry` for humans. `/registry.json` for
   machines. Do not edit a version in place.
+- `share.ts` — frozen social card copy. `/share` is what a crawler
+  reads. It may say Holds only because the public example is golden.
+  It may not publish a person. The old og.jpg with a fictional name
+  is not this protocol.
 - `agent-contract.ts` — public machine interface. Agents may verify.
   They may not mint VERIFIED, publish a person, or authorize payment.
   `/agents` renders this object. Tests freeze it.
+
+
 
 
 

@@ -17,6 +17,7 @@ import { Route as DoctrineRouteImport } from './routes/doctrine'
 import { Route as NamingRouteImport } from './routes/naming'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as RegistryRouteImport } from './routes/registry'
+import { Route as ShareRouteImport } from './routes/share'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as WorkshopRouteImport } from './routes/workshop'
 import { Route as DemoConsultRouteImport } from './routes/demo/consult'
@@ -64,6 +65,11 @@ const PoliciesRoute = PoliciesRouteImport.update({
 const RegistryRoute = RegistryRouteImport.update({
   id: '/registry',
   path: '/registry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShareRoute = ShareRouteImport.update({
+  id: '/share',
+  path: '/share',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyRoute = VerifyRouteImport.update({
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
+  '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
+  '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
   '/registry': typeof RegistryRoute
+  '/share': typeof ShareRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/naming'
     | '/policies'
     | '/registry'
+    | '/share'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/naming'
     | '/policies'
     | '/registry'
+    | '/share'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/naming'
     | '/policies'
     | '/registry'
+    | '/share'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   NamingRoute: typeof NamingRoute
   PoliciesRoute: typeof PoliciesRoute
   RegistryRoute: typeof RegistryRoute
+  ShareRoute: typeof ShareRoute
   VerifyRoute: typeof VerifyRoute
   WorkshopRoute: typeof WorkshopRoute
   DemoConsultRoute: typeof DemoConsultRoute
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/registry'
       fullPath: '/registry'
       preLoaderRoute: typeof RegistryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share': {
+      id: '/share'
+      path: '/share'
+      fullPath: '/share'
+      preLoaderRoute: typeof ShareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verify': {
@@ -364,6 +384,7 @@ const rootRouteChildren: RootRouteChildren = {
   NamingRoute: NamingRoute,
   PoliciesRoute: PoliciesRoute,
   RegistryRoute: RegistryRoute,
+  ShareRoute: ShareRoute,
   VerifyRoute: VerifyRoute,
   WorkshopRoute: WorkshopRoute,
   DemoConsultRoute: DemoConsultRoute,

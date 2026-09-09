@@ -18,6 +18,19 @@ export const Route = createRootRoute({
           "We verify the obligation. We do not publish the person. Open Proof of Fulfillment receipts for tuition and care.",
       },
       { name: "theme-color", content: "#F3EFE6" },
+      { property: "og:title", content: APP_NAME },
+      {
+        property: "og:description",
+        content: "We verify the obligation. We do not publish the person.",
+      },
+      { property: "og:image", content: "/og-share.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: APP_NAME },
+      {
+        name: "twitter:description",
+        content: "We verify the obligation. We do not publish the person.",
+      },
+      { name: "twitter:image", content: "/og-share.png" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

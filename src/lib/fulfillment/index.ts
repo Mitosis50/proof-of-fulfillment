@@ -15,6 +15,7 @@ export * from "./paper.ts";
 export * from "./lookup.ts";
 export * from "./refusal.ts";
 export * from "./registry.ts";
+export * from "./share.ts";
 
 export function formatMoney(minor: number, currency = "USD"): string {
   return new Intl.NumberFormat("en-US", {
