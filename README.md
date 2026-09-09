@@ -95,8 +95,10 @@ issue a **new** receipt. History is not rewritten.
 Print or save as PDF from **Print paper receipt**, or open `/paper/{id}`.
 The sheet is the public receipt: assertions, not-asserted, full digest.
 It is not a person. Use the browser’s Save as PDF. There is no name on it.
-Paste that digest on **Verify**. If this explorer holds the bytes, the
-independent check runs. A digest alone is not a receipt.
+Paste that digest on **Verify**, or open `/verify?digest=sha256:…`.
+If this explorer holds the bytes, the independent check runs. A digest
+alone is not a receipt.
+
 
 
 

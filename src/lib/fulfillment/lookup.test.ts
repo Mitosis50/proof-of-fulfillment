@@ -50,4 +50,13 @@ describe("lookup by digest", () => {
     if (!found.ok) return;
     assert.equal(found.via, "id");
   });
+
+  it("a digest query value is the canonical sha256 string", async () => {
+    const { receipts } = await buildDemoLibrary();
+    const example = receipts.find((r) => r.receipt_id === PUBLIC_EXAMPLE_RECEIPT_ID);
+    assert.ok(example);
+    const canonical = normalizeDigest(example.receipt_digest);
+    assert.equal(canonical, example.receipt_digest);
+    assert.match(canonical ?? "", /^sha256:[0-9a-f]{64}$/);
+  });
 });

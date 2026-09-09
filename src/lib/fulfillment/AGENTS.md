@@ -69,6 +69,8 @@ A new policy needs:
 - `lookup.ts` — find a receipt this explorer already holds, by id or by
   full SHA-256. A digest names a receipt; it is not the receipt. Short
   prefixes are not keys. An unknown digest does not hold here.
+  `/verify?digest=` opens the independent check when the bytes are here.
+
 
 
 

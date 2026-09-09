@@ -21,12 +21,14 @@ import { useReceipts } from "@/store/receipts";
 
 type VerifySearch = {
   example?: string;
+  digest?: string;
 };
 
 export const Route = createFileRoute("/verify")({
   component: VerifyPage,
   validateSearch: (search: Record<string, unknown>): VerifySearch => ({
     example: typeof search.example === "string" ? search.example : undefined,
+    digest: typeof search.digest === "string" ? search.digest : undefined,
   }),
 });
 
@@ -41,8 +43,10 @@ function VerifyPage() {
 function VerifyInner() {
   const receipts = useReceipts((s) => s.receipts);
   const byId = useReceipts((s) => s.byId);
-  const { example } = Route.useSearch();
-  const [query, setQuery] = useState(example ?? PUBLIC_EXAMPLE_RECEIPT_ID);
+  const { example, digest } = Route.useSearch();
+  const [query, setQuery] = useState(
+    digest ?? example ?? PUBLIC_EXAMPLE_RECEIPT_ID,
+  );
   const [json, setJson] = useState("");
   const [fileName, setFileName] = useState<string | null>(null);
   const [importedChain, setImportedChain] = useState<SignedReceipt[]>([]);
@@ -86,6 +90,34 @@ function VerifyInner() {
       return;
     }
 
+    if (digest) {
+      const found = lookupReceipt(digest, receipts);
+      setQuery(digest);
+      if (!found.ok) {
+        setError(
+          "No receipt with that digest in this explorer. A digest names a receipt; it is not the receipt. Bring the file or the share link.",
+        );
+        setActive(null);
+        setReport(null);
+        return;
+      }
+      setImportedChain([]);
+      void (async () => {
+        setBusy(true);
+        setError(null);
+        try {
+          const result = await verifyIndependently(found.receipt, receipts);
+          setActive(found.receipt);
+          setReport(result);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Verification failed");
+        } finally {
+          setBusy(false);
+        }
+      })();
+      return;
+    }
+
     const exampleId = example === PUBLIC_EXAMPLE_RECEIPT_ID ? example : undefined;
     if (!exampleId) return;
     const found = byId(exampleId);
@@ -107,7 +139,7 @@ function VerifyInner() {
         setBusy(false);
       }
     })();
-  }, [example, byId, receipts]);
+  }, [example, digest, byId, receipts]);
 
 
   async function run(receipt: SignedReceipt, extra: SignedReceipt[] = [], tamper = false) {
