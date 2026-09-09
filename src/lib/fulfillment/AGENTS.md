@@ -71,6 +71,19 @@ A new policy needs:
   prefixes are not keys. An unknown digest does not hold here.
   `/verify?digest=` opens the independent check when the bytes are here.
   Paper QR encodes that URL only — not a person, not `#pof=`.
+- `refusal.ts` — the unique public object: what this receipt will not
+  say. `/refusal/{id}` is Holds on one side, the not-asserted list on
+  the other. No person. Golden not-asserted lists cannot shrink.
+- `registry.ts` — frozen public policy registry. Hashes must match
+  `LOCKED_POLICY_HASHES`. `/registry` for humans. `/registry.json` for
+  machines. Do not edit a version in place.
+- `agent-contract.ts` — public machine interface. Agents may verify.
+  They may not mint VERIFIED, publish a person, or authorize payment.
+  `/agents` renders this object. Tests freeze it.
+
+
+
+
 
 
 

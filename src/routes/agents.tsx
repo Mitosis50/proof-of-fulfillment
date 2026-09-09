@@ -132,7 +132,11 @@ function AgentsPage() {
         <Link to="/doctrine" className="text-primary underline-offset-4 hover:underline">
           doctrine
         </Link>
-        . Neither is a verification run.
+        . Neither is a verification run. Policy hashes live on{" "}
+        <Link to="/registry" className="text-primary underline-offset-4 hover:underline">
+          the registry
+        </Link>
+        .
       </p>
     </div>
   );

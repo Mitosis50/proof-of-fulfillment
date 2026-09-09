@@ -13,6 +13,8 @@ export * from "./portable.ts";
 export * from "./agent-contract.ts";
 export * from "./paper.ts";
 export * from "./lookup.ts";
+export * from "./refusal.ts";
+export * from "./registry.ts";
 
 export function formatMoney(minor: number, currency = "USD"): string {
   return new Intl.NumberFormat("en-US", {

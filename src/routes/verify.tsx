@@ -342,6 +342,13 @@ function VerifyInner() {
               </Link>
               <PortableDownload receipt={active} library={[...importedChain, ...receipts]} />
               <PaperPrint receipt={active} />
+              <Link
+                to="/refusal/$id"
+                params={{ id: active.receipt_id }}
+                className="text-sm text-primary underline-offset-4 hover:underline"
+              >
+                What it will not say
+              </Link>
             </div>
           </div>
           <FulfillmentReceipt receipt={active} />

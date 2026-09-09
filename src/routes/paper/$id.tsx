@@ -64,6 +64,11 @@ function PaperInner() {
               Check this digest
             </Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link to="/refusal/$id" params={{ id: receipt.receipt_id }}>
+              What it will not say
+            </Link>
+          </Button>
         </div>
       </div>
       <FulfillmentReceipt receipt={receipt} />

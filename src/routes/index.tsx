@@ -39,6 +39,14 @@ function Home() {
           <Button asChild variant="outline">
             <Link to="/workshop">Issue your own</Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link
+              to="/refusal/$id"
+              params={{ id: PUBLIC_EXAMPLE_RECEIPT_ID }}
+            >
+              What it will not say
+            </Link>
+          </Button>
         </div>
         <p className="mt-4 max-w-xl text-sm text-fg-muted">
           A synthetic tuition receipt. Independent check. No person.

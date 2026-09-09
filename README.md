@@ -95,8 +95,13 @@ issue a **new** receipt. History is not rewritten.
 Print or save as PDF from **Print paper receipt**, or open `/paper/{id}`.
 The sheet is the public receipt: assertions, not-asserted, full digest.
 It is not a person. Use the browser’s Save as PDF. There is no name on it.
-The paper sheet prints a QR to `/verify?digest=sha256:…`. Camera opens
-the independent check. It does not encode a person or the portable file.
+The public example has a refusal card: `/refusal/pof_edu_t2_ok`.
+Holds on one side. What the receipt will not say on the other.
+No person.
+
+The policy pin is `/registry` and `/registry.json`. Hashes are frozen.
+A one-byte policy change is a new version.
+
 
 
 

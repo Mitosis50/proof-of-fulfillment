@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { EDU_TUITION_V1, CARE_CONSULT_V1, HOUSING_RENT_V1, signPolicy, shortDigest } from "@/lib/fulfillment";
 import type { SignedPolicy } from "@/lib/fulfillment";
@@ -24,7 +24,12 @@ function PoliciesPage() {
       <h1 className="mt-2 font-display text-4xl">Three policies. Frozen in place.</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">
         A policy version never mutates after it has issued receipts. A one-byte
-        change is a new version, with a new hash.
+        change is a new version, with a new hash. The pin is on{" "}
+        <Link to="/registry" className="text-primary underline-offset-4 hover:underline">
+          the registry
+        </Link>
+        .
+
       </p>
       <div className="mt-10 grid gap-6 lg:grid-cols-3">
         {edu ? <PolicyCard policy={edu} /> : null}

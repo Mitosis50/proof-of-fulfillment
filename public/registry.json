@@ -1,0 +1,81 @@
+{
+  "record_type": "pof.policy_registry",
+  "schema_version": "1.0.0",
+  "protocol": "Proof of Fulfillment",
+  "product": "Fulfilled",
+  "tagline": "We verify the obligation. We do not publish the person.",
+  "notice": "A policy version never mutates after it has issued receipts. Conversation is not authority.",
+  "policies": [
+    {
+      "policy_id": "EDU-TUITION",
+      "version": "1.0.0",
+      "title": "Education tuition, one term",
+      "domain": "education",
+      "scope": "One bounded tuition obligation for one opaque student case reference, one institution, one invoice or term, and one authorized destination.",
+      "hash": "sha256:4d234eef41aecd0a114e172ceae7ad6122d16c9c615489583e15c43d240aad7a",
+      "required": [
+        "INSTITUTION_IDENTITY_VERIFIED",
+        "ENROLLMENT_CONFIRMED",
+        "INVOICE_MATCHED",
+        "SETTLEMENT_CONFIRMED",
+        "DUPLICATE_NOT_FOUND",
+        "AUTHORIZATION_MATCHED",
+        "INDEPENDENCE_PASSED"
+      ],
+      "not_asserted": [
+        "ACADEMIC_PERFORMANCE",
+        "GRADES_OR_TRANSCRIPT",
+        "ATTENDANCE",
+        "PRIVATE_STUDENT_RECORDS"
+      ]
+    },
+    {
+      "policy_id": "CARE-CONSULT",
+      "version": "1.0.0",
+      "title": "Licensed consultation, one session",
+      "domain": "care",
+      "scope": "One bounded consultation for one opaque authorized case reference, one provider, one service window, and one funding or settlement event.",
+      "hash": "sha256:d455e8ec35b08de5bf224f9d8eed768f42a50b13cf3aa4c7c6831a65670f7be8",
+      "required": [
+        "PROVIDER_IDENTITY_VERIFIED",
+        "CONSULT_OCCURRENCE_CONFIRMED",
+        "CASE_AUTHORIZATION_MATCHED",
+        "PAYMENT_OR_FUNDING_CONFIRMED",
+        "DUPLICATE_NOT_FOUND",
+        "INDEPENDENCE_PASSED"
+      ],
+      "not_asserted": [
+        "CLINICAL_CORRECTNESS",
+        "DIAGNOSIS",
+        "TREATMENT_EFFECTIVENESS",
+        "MEDICAL_NECESSITY",
+        "PRIVATE_MEDICAL_RECORDS"
+      ]
+    },
+    {
+      "policy_id": "HOUSING-RENT",
+      "version": "1.0.0",
+      "title": "Housing rent, one month",
+      "domain": "housing",
+      "scope": "One bounded rent obligation for one opaque household case reference, one approved payee, one calendar month, and one authorized destination.",
+      "hash": "sha256:d71e337d7daa799f97007d528925ce8e3874fb59c5000cb4f3895d8bea956f11",
+      "required": [
+        "PAYEE_IDENTITY_VERIFIED",
+        "OCCUPANCY_PERIOD_CONFIRMED",
+        "RENT_LEDGER_MATCHED",
+        "SETTLEMENT_CONFIRMED",
+        "AUTHORIZATION_MATCHED",
+        "DUPLICATE_NOT_FOUND",
+        "INDEPENDENCE_PASSED"
+      ],
+      "not_asserted": [
+        "TENANT_CREDITWORTHINESS",
+        "HOUSEHOLD_ROSTER",
+        "HOUSING_QUALITY",
+        "NEIGHBORHOOD_SAFETY",
+        "EVICTION_HISTORY",
+        "PRIVATE_TENANT_RECORDS"
+      ]
+    }
+  ]
+}

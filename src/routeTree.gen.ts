@@ -16,6 +16,7 @@ import { Route as CirclesRouteImport } from './routes/circles'
 import { Route as DoctrineRouteImport } from './routes/doctrine'
 import { Route as NamingRouteImport } from './routes/naming'
 import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as RegistryRouteImport } from './routes/registry'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as WorkshopRouteImport } from './routes/workshop'
 import { Route as DemoConsultRouteImport } from './routes/demo/consult'
@@ -23,6 +24,7 @@ import { Route as DemoRentRouteImport } from './routes/demo/rent'
 import { Route as DemoTuitionRouteImport } from './routes/demo/tuition'
 import { Route as PaperIdRouteImport } from './routes/paper/$id'
 import { Route as ReceiptsIdRouteImport } from './routes/receipts/$id'
+import { Route as RefusalIdRouteImport } from './routes/refusal/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,6 +59,11 @@ const NamingRoute = NamingRouteImport.update({
 const PoliciesRoute = PoliciesRouteImport.update({
   id: '/policies',
   path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistryRoute = RegistryRouteImport.update({
+  id: '/registry',
+  path: '/registry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyRoute = VerifyRouteImport.update({
@@ -94,6 +101,11 @@ const ReceiptsIdRoute = ReceiptsIdRouteImport.update({
   path: '/receipts/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RefusalIdRoute = RefusalIdRouteImport.update({
+  id: '/refusal/$id',
+  path: '/refusal/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/doctrine': typeof DoctrineRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
+  '/registry': typeof RegistryRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -110,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/demo/tuition': typeof DemoTuitionRoute
   '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
+  '/refusal/$id': typeof RefusalIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,6 +133,7 @@ export interface FileRoutesByTo {
   '/doctrine': typeof DoctrineRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
+  '/registry': typeof RegistryRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -126,6 +141,7 @@ export interface FileRoutesByTo {
   '/demo/tuition': typeof DemoTuitionRoute
   '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
+  '/refusal/$id': typeof RefusalIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -136,6 +152,7 @@ export interface FileRoutesById {
   '/doctrine': typeof DoctrineRoute
   '/naming': typeof NamingRoute
   '/policies': typeof PoliciesRoute
+  '/registry': typeof RegistryRoute
   '/verify': typeof VerifyRoute
   '/workshop': typeof WorkshopRoute
   '/demo/consult': typeof DemoConsultRoute
@@ -143,6 +160,7 @@ export interface FileRoutesById {
   '/demo/tuition': typeof DemoTuitionRoute
   '/paper/$id': typeof PaperIdRoute
   '/receipts/$id': typeof ReceiptsIdRoute
+  '/refusal/$id': typeof RefusalIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -154,6 +172,7 @@ export interface FileRouteTypes {
     | '/doctrine'
     | '/naming'
     | '/policies'
+    | '/registry'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -161,6 +180,7 @@ export interface FileRouteTypes {
     | '/demo/tuition'
     | '/paper/$id'
     | '/receipts/$id'
+    | '/refusal/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,6 +190,7 @@ export interface FileRouteTypes {
     | '/doctrine'
     | '/naming'
     | '/policies'
+    | '/registry'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -177,6 +198,7 @@ export interface FileRouteTypes {
     | '/demo/tuition'
     | '/paper/$id'
     | '/receipts/$id'
+    | '/refusal/$id'
   id:
     | '__root__'
     | '/'
@@ -186,6 +208,7 @@ export interface FileRouteTypes {
     | '/doctrine'
     | '/naming'
     | '/policies'
+    | '/registry'
     | '/verify'
     | '/workshop'
     | '/demo/consult'
@@ -193,6 +216,7 @@ export interface FileRouteTypes {
     | '/demo/tuition'
     | '/paper/$id'
     | '/receipts/$id'
+    | '/refusal/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -203,6 +227,7 @@ export interface RootRouteChildren {
   DoctrineRoute: typeof DoctrineRoute
   NamingRoute: typeof NamingRoute
   PoliciesRoute: typeof PoliciesRoute
+  RegistryRoute: typeof RegistryRoute
   VerifyRoute: typeof VerifyRoute
   WorkshopRoute: typeof WorkshopRoute
   DemoConsultRoute: typeof DemoConsultRoute
@@ -210,6 +235,7 @@ export interface RootRouteChildren {
   DemoTuitionRoute: typeof DemoTuitionRoute
   PaperIdRoute: typeof PaperIdRoute
   ReceiptsIdRoute: typeof ReceiptsIdRoute
+  RefusalIdRoute: typeof RefusalIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -263,6 +289,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registry': {
+      id: '/registry'
+      path: '/registry'
+      fullPath: '/registry'
+      preLoaderRoute: typeof RegistryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verify': {
       id: '/verify'
       path: '/verify'
@@ -312,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReceiptsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/refusal/$id': {
+      id: '/refusal/$id'
+      path: '/refusal/$id'
+      fullPath: '/refusal/$id'
+      preLoaderRoute: typeof RefusalIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -323,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   DoctrineRoute: DoctrineRoute,
   NamingRoute: NamingRoute,
   PoliciesRoute: PoliciesRoute,
+  RegistryRoute: RegistryRoute,
   VerifyRoute: VerifyRoute,
   WorkshopRoute: WorkshopRoute,
   DemoConsultRoute: DemoConsultRoute,
@@ -330,6 +371,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoTuitionRoute: DemoTuitionRoute,
   PaperIdRoute: PaperIdRoute,
   ReceiptsIdRoute: ReceiptsIdRoute,
+  RefusalIdRoute: RefusalIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
