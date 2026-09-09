@@ -23,7 +23,9 @@ published policy. It does **not** prove a person, a diagnosis, a grade, or a
 metaphysical truth.
 
 This is a **synthetic explorer**. No real students, patients, invoices, or
-bank identifiers. Ever.
+bank identifiers. Ever. The public one-tap example is `pof_edu_t2_ok`
+(`/verify?example=pof_edu_t2_ok`). It must remain VERIFIED.
+
 
 ---
 

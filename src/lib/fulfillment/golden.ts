@@ -1,5 +1,8 @@
 import type { Verdict } from "./types.ts";
 
+/** The receipt a stranger can open in one tap. Frozen. Must stay VERIFIED. */
+export const PUBLIC_EXAMPLE_RECEIPT_ID = "pof_edu_t2_ok" as const;
+
 /** Frozen engine cases. Changing a verdict here is a protocol change. */
 export const GOLDEN_CASES = [
   {

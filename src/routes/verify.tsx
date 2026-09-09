@@ -10,13 +10,23 @@ import {
   decodePortableFragment,
   packPortable,
   parsePortable,
+  PUBLIC_EXAMPLE_RECEIPT_ID,
   serializePortable,
   verifyIndependently,
   type SignedReceipt,
 } from "@/lib/fulfillment";
 import { useReceipts } from "@/store/receipts";
 
-export const Route = createFileRoute("/verify")({ component: VerifyPage });
+type VerifySearch = {
+  example?: string;
+};
+
+export const Route = createFileRoute("/verify")({
+  component: VerifyPage,
+  validateSearch: (search: Record<string, unknown>): VerifySearch => ({
+    example: typeof search.example === "string" ? search.example : undefined,
+  }),
+});
 
 function VerifyPage() {
   return (
@@ -29,7 +39,8 @@ function VerifyPage() {
 function VerifyInner() {
   const receipts = useReceipts((s) => s.receipts);
   const byId = useReceipts((s) => s.byId);
-  const [query, setQuery] = useState("pof_edu_t2_ok");
+  const { example } = Route.useSearch();
+  const [query, setQuery] = useState(example ?? PUBLIC_EXAMPLE_RECEIPT_ID);
   const [json, setJson] = useState("");
   const [fileName, setFileName] = useState<string | null>(null);
   const [importedChain, setImportedChain] = useState<SignedReceipt[]>([]);
@@ -47,22 +58,46 @@ function VerifyInner() {
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (!hash.includes("pof=")) return;
-    const parsed = decodePortableFragment(hash);
-    if (!parsed.ok) {
-      setError(parsed.error);
+    if (hash.includes("pof=")) {
+      const parsed = decodePortableFragment(hash);
+      if (!parsed.ok) {
+        setError(parsed.error);
+        return;
+      }
+      setImportedChain(parsed.chain);
+      setJson(serializePortable(packPortable(parsed.receipt, parsed.chain)));
+      void (async () => {
+        setBusy(true);
+        try {
+          const result = await verifyIndependently(parsed.receipt, [
+            parsed.receipt,
+            ...parsed.chain,
+          ]);
+          setActive(parsed.receipt);
+          setReport(result);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Verification failed");
+        } finally {
+          setBusy(false);
+        }
+      })();
       return;
     }
-    setImportedChain(parsed.chain);
-    setJson(serializePortable(packPortable(parsed.receipt, parsed.chain)));
+
+    const exampleId = example === PUBLIC_EXAMPLE_RECEIPT_ID ? example : undefined;
+    if (!exampleId) return;
+    const found = byId(exampleId);
+    if (!found) {
+      setError("The public example is not in this explorer.");
+      return;
+    }
+    setQuery(found.receipt_id);
     void (async () => {
       setBusy(true);
+      setError(null);
       try {
-        const result = await verifyIndependently(parsed.receipt, [
-          parsed.receipt,
-          ...parsed.chain,
-        ]);
-        setActive(parsed.receipt);
+        const result = await verifyIndependently(found, receipts);
+        setActive(found);
         setReport(result);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Verification failed");
@@ -70,7 +105,7 @@ function VerifyInner() {
         setBusy(false);
       }
     })();
-  }, []);
+  }, [example, byId, receipts]);
 
 
   async function run(receipt: SignedReceipt, extra: SignedReceipt[] = [], tamper = false) {

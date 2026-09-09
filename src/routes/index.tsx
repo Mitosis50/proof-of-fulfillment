@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, EyeOff, Scale, Stamp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
+import { PUBLIC_EXAMPLE_RECEIPT_ID } from "@/lib/fulfillment";
 import { useReceipts } from "@/store/receipts";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -30,15 +31,18 @@ function Home() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
-            <Link to="/workshop">
-              Issue a receipt
+            <Link to="/verify" search={{ example: PUBLIC_EXAMPLE_RECEIPT_ID }}>
+              See a verified receipt
               <ArrowRight />
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/verify">Verify a portable receipt</Link>
+            <Link to="/workshop">Issue your own</Link>
           </Button>
         </div>
+        <p className="mt-4 max-w-xl text-sm text-fg-muted">
+          A synthetic tuition receipt. Independent check. No person.
+        </p>
       </section>
 
       <section className="border-y border-border bg-bg-elevated/60">

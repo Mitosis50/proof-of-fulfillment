@@ -92,6 +92,10 @@ Then open **Workshop** (live issuance), **Verify** (independent check),
 `pof_rent_*` ids. Live issuances use `pof_live_*`. Challenge and correction
 issue a **new** receipt. History is not rewritten.
 
+A stranger can open a verified example without issuing: `/verify?example=pof_edu_t2_ok`.
+That id is frozen. It must remain VERIFIED.
+
+
 A receipt can leave this machine. Download `{receipt_id}.pof.json` from
 Workshop, the receipt page, or Verify. The file is the public receipt plus
 any ancestor receipts. It is not a person. Paste or open that file on Verify.

@@ -8,6 +8,7 @@ import {
   GOLDEN_CASES,
   LOCKED_POLICY_HASHES,
   LOCKED_RECEIPT_DIGESTS,
+  PUBLIC_EXAMPLE_RECEIPT_ID,
 } from "./golden.ts";
 import { detachSeal, signReceiptDigest } from "./sign.ts";
 import type { SignedReceipt } from "./types.ts";
@@ -136,5 +137,17 @@ describe("Proof of Fulfillment golden cases", () => {
     assert.equal(report.ok, false);
     assert.equal(report.digest_matches, true);
     assert.equal(report.signature_valid, false);
+  });
+
+  it("the public example is the frozen tuition receipt that Holds", async () => {
+    assert.equal(PUBLIC_EXAMPLE_RECEIPT_ID, "pof_edu_t2_ok");
+    const golden = GOLDEN_CASES.find((c) => c.id === PUBLIC_EXAMPLE_RECEIPT_ID);
+    assert.ok(golden);
+    assert.equal(golden.verdict, "VERIFIED");
+    const { receipts } = await buildDemoLibrary();
+    const receipt = receipts.find((r) => r.receipt_id === PUBLIC_EXAMPLE_RECEIPT_ID);
+    assert.ok(receipt);
+    const report = await verifyIndependently(receipt, receipts);
+    assert.equal(report.ok, true);
   });
 });
