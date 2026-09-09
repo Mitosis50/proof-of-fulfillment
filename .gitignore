@@ -1,0 +1,18 @@
+node_modules
+.vercel
+.output
+dist
+*.log
+.DS_Store
+.node_modules.lock
+.project_id
+
+
+# Sandbox QA and unpublished drafts
+screenshots
+artifacts
+attachments
+
+# Grok workspace internals — keep the auth-off flag
+.grok/*
+!.grok/app-env.json

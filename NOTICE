@@ -1,0 +1,14 @@
+Fulfilled
+Proof of Fulfillment
+
+Copyright 2026 Fulfilled contributors
+
+This product is a synthetic explorer. It does not contain real student,
+patient, invoice, or bank identifiers. Public receipts hold commitments,
+statuses, and what was not asserted.
+
+The explorer Ed25519 key (`fulfilled-explorer-ed25519-v1`) is published on
+purpose. It proves this demo issued a receipt. It is not a production
+certificate authority.
+
+We verify the obligation. We do not publish the person.
