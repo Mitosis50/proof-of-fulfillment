@@ -50,7 +50,12 @@ function DoctrinePage() {
         <Link to="/naming" className="text-primary underline-offset-4 hover:underline">
           naming
         </Link>{" "}
-        page. Allowed words describe obligations. Banned words rank people.
+        page. How a machine may check a receipt is on{" "}
+        <Link to="/agents" className="text-primary underline-offset-4 hover:underline">
+          agents
+        </Link>
+        . Allowed words describe obligations. Banned words rank people.
+
       </p>
       <ol className="mt-10 space-y-8">
         {PRINCIPLES.map((p, i) => (

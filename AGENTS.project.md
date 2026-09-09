@@ -41,6 +41,9 @@ bank identifiers. Ever.
 5. No pay-for-verdict. Independent verification is free.
 6. Conversation is not authority. An agent, chat, or board cannot authorize
    payment, rewrite a policy, or turn an unverified claim into `VERIFIED`.
+   The public machine interface is `/agents` (`agent-contract.ts`). Agents
+   may report Holds or Does not hold. They may not mint a verdict.
+
 
 **NOT ASSERTED is load-bearing.** Education receipts must never assert academic
 performance, grades, transcripts, or attendance. Care receipts must never

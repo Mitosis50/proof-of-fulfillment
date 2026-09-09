@@ -64,6 +64,10 @@ A new policy needs:
   fragment (`#pof=`), never a query string, so a server log does not keep
   the receipt. Do not put private lives in the file. Do not put the
   envelope inside the digest.
+- `agent-contract.ts` — public machine interface. Agents may verify.
+  They may not mint VERIFIED, publish a person, or authorize payment.
+  `/agents` renders this object. Tests freeze it.
+
 
 
 

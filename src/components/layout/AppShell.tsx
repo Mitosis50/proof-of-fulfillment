@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/workshop", label: "Workshop" },
   { to: "/verify", label: "Verify" },
+  { to: "/agents", label: "Agents" },
   { to: "/demo/tuition", label: "Tuition" },
   { to: "/demo/consult", label: "Consult" },
   { to: "/circles", label: "Circle" },

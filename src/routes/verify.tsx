@@ -152,6 +152,12 @@ function VerifyInner() {
         file. This verifier does not reuse the engine that issued it. It
         recomputes the digest, checks the Ed25519 signature, and checks the
         policy. The explorer key is public. It is not a production authority.
+        Machines: read the{" "}
+        <Link to="/agents" className="text-primary underline-offset-4 hover:underline">
+          agent contract
+        </Link>
+        . You may check. You may not mint VERIFIED.
+
       </p>
 
       <form onSubmit={onLookup} className="mt-8 grid gap-4 lg:grid-cols-2">

@@ -88,7 +88,7 @@ npm run dev
 ```
 
 Then open **Workshop** (live issuance), **Verify** (independent check),
-**Doctrine**, and **Naming**. Museum receipts keep `pof_edu_*` / `pof_care_*` /
+**Agents** (machine contract), **Doctrine**, and **Naming**. Museum receipts keep `pof_edu_*` / `pof_care_*` /
 `pof_rent_*` ids. Live issuances use `pof_live_*`. Challenge and correction
 issue a **new** receipt. History is not rewritten.
 
