@@ -36,7 +36,7 @@ function Home() {
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/verify">Verify a receipt</Link>
+            <Link to="/verify">Verify a portable receipt</Link>
           </Button>
         </div>
       </section>

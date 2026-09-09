@@ -58,6 +58,11 @@ A new policy needs:
 - `fixtures.ts` — deterministic museum library. Digests locked.
 - `workshop.ts` — live issuance from evidence flags. Ids `pof_live_*`.
   Live receipts are not golden; their *evaluation rules* still are.
+- `portable.ts` — a receipt that can leave this machine. Envelope
+  `pof.portable_receipt` wraps the signed public receipt plus ancestors.
+  Privacy scan refuses names, emails, diagnoses. Do not put private lives
+  in the file. Do not put the envelope inside the digest.
+
 
 ## Tests
 

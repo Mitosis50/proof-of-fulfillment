@@ -92,6 +92,13 @@ Then open **Workshop** (live issuance), **Verify** (independent check),
 `pof_rent_*` ids. Live issuances use `pof_live_*`. Challenge and correction
 issue a **new** receipt. History is not rewritten.
 
+A receipt can leave this machine. Download `{receipt_id}.pof.json` from
+Workshop, the receipt page, or Verify. The file is the public receipt plus
+any ancestor receipts. It is not a person. Paste or open that file on Verify.
+Same digest, same signature. Holds or does not hold. A file with a name,
+email, or diagnosis is refused.
+
+
 ## Host it yourself (GitHub → Vercel)
 
 This is the intended public home: a repository you own, a Vercel project you

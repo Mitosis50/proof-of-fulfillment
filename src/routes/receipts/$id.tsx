@@ -3,7 +3,12 @@ import { SeedGate } from "@/components/layout/SeedGate";
 import { Button } from "@/components/ui/button";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
 import { useReceipts } from "@/store/receipts";
-import { shortDigest } from "@/lib/fulfillment";
+import { PortableDownload } from "@/components/receipt/PortableDownload";
+import {
+  packPortable,
+  serializePortable,
+  shortDigest,
+} from "@/lib/fulfillment";
 
 export const Route = createFileRoute("/receipts/$id")({
   component: ReceiptPage,
@@ -47,7 +52,10 @@ function ReceiptInner() {
   );
 
   async function copy() {
-    await navigator.clipboard.writeText(JSON.stringify(receipt, null, 2));
+    if (!receipt) return;
+    await navigator.clipboard.writeText(
+      serializePortable(packPortable(receipt, receipts)),
+    );
   }
 
   return (
@@ -121,8 +129,9 @@ function ReceiptInner() {
             <Link to="/workshop">{ctx ? "Continue in workshop" : "Issue your own"}</Link>
           </Button>
           <Button type="button" variant="outline" onClick={() => void copy()}>
-            Copy JSON
+            Copy portable JSON
           </Button>
+          <PortableDownload receipt={receipt} library={receipts} />
         </div>
       </aside>
     </div>

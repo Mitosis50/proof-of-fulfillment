@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { FulfillmentReceipt } from "@/components/receipt/FulfillmentReceipt";
+import { PortableDownload } from "@/components/receipt/PortableDownload";
 import { Badge, verdictTone } from "@/components/ui/badge";
 import { useReceipts } from "@/store/receipts";
 import {
@@ -264,13 +265,16 @@ function WorkshopInner() {
                   <p className="mt-1 text-sm text-fg-muted">
                     {report.notes[report.notes.length - 1]}
                   </p>
-                  <Link
-                    to="/receipts/$id"
-                    params={{ id: active.receipt_id }}
-                    className="mt-4 inline-block text-sm text-primary underline-offset-4 hover:underline"
-                  >
-                    Open the human receipt
-                  </Link>
+                  <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Link
+                      to="/receipts/$id"
+                      params={{ id: active.receipt_id }}
+                      className="text-sm text-primary underline-offset-4 hover:underline"
+                    >
+                      Open the human receipt
+                    </Link>
+                    <PortableDownload receipt={active} library={receipts} />
+                  </div>
                 </div>
               ) : null}
 

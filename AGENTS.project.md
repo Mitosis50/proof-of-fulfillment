@@ -31,7 +31,9 @@ bank identifiers. Ever.
 
 1. Verify evidence, not metaphysical truth.
 2. Private lives stay off the public record. No names, diagnoses, grades,
-   invoices, or bank identifiers on a receipt.
+   invoices, or bank identifiers on a receipt. A portable `.pof.json` file
+   is the public receipt plus ancestors. It is still not a person. Refuse
+   any file that includes private-life fields.
 3. Policy versions are immutable. `EDU-TUITION v1.0.0` cannot be edited after
    it has issued a receipt. A rule change is a **new version**.
 4. Conclusions are correctable. History remains. A later receipt may supersede
